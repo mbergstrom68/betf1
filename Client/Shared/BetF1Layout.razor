@@ -1,0 +1,86 @@
+@inherits LayoutComponentBase
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+
+      <div class="logo">
+        <h1 class="text-light"><a href="/">Bet F1</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <Bar id="navbar" Mode="BarMode.Horizontal" Breakpoint="Breakpoint.Desktop" >
+          <BarMenu>
+              <BarStart>
+                  <BarItem>
+                      <BarLink To="/">Hem</BarLink>
+                  </BarItem>
+                  <BarItem>
+                      <BarLink To="/bet">Tippa</BarLink>
+                  </BarItem>
+                  <BarItem>
+                      <BarLink To="/news">Nyheter</BarLink>
+                  </BarItem>
+                  <BarItem>
+                      <BarLink To="/calendar">Kalender</BarLink>
+                  </BarItem>
+              </BarStart>
+          </BarMenu>
+      </Bar>
+
+    </div>
+  </header><!-- End Header -->
+  
+  
+
+  <main id="main">    
+    @Body
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h3>Bet F1</h3>
+            <p>
+              Göteborgsvägen 37 <br>
+              441 43, Alingsås<br>
+              Sverige <br><br>
+              <strong>Phone:</strong> +46 761 65 84 66<br>
+              <strong>Email:</strong> info@example.com<br>
+            </p>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="/">Hem</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Om oss</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">F1 Betting</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Join Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>    
+  </footer><!-- End Footer -->
