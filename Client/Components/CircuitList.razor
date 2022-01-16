@@ -1,0 +1,41 @@
+@inject ICircuitService CircuitService
+
+@if(SelectedCircuit is null)
+{
+    @foreach (var circuit in Circuits)
+    {
+        <Container @onclick="@(e => HandleCircuitClick(e, circuit.CircuitId))">
+            <Card>
+                <CardBody Margin="Margin.Is2.OnMobile.Is5.OnDesktop">
+                    @circuit.Name
+                </CardBody>
+            </Card>
+        </Container>   
+    }
+} else
+{
+    <Container>
+        <Card>
+            <CardBody Margin="Margin.Is2.OnMobile.Is5.OnDesktop">
+                @SelectedCircuit.Name
+            </CardBody>
+        </Card>
+    </Container>
+}
+
+
+@code
+{    
+    private IEnumerable<Circuit> Circuits = Enumerable.Empty<Circuit>();
+    private Circuit? SelectedCircuit = null;
+
+    protected override async Task OnInitializedAsync()
+    {    
+        Circuits = await CircuitService.GetCircuitsAsync();        
+    }
+
+    private void HandleCircuitClick(MouseEventArgs e, int circuitId)
+    {
+        SelectedCircuit = Circuits.Where(x => x.CircuitId == circuitId).FirstOrDefault();
+    }
+}
