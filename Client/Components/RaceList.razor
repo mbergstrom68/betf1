@@ -1,0 +1,43 @@
+@using ErgastApi.Responses.Models.RaceInfo
+
+@inject IRaceService RaceService
+
+@if(SelectedRace is null)
+{
+    <Container>    
+    @foreach (var race in Races)
+    {   
+        <Card @onclick="() => HandleRaceClick(race)" >
+            <CardBody>
+                @race.RaceName
+            </CardBody>
+        </Card>
+    }
+    </Container>   
+} else
+{
+    <Container>
+        <Card>
+            <CardBody>
+                @SelectedRace.RaceName
+            </CardBody>
+        </Card>
+    </Container>
+    <Betting SelectedRace="SelectedRace" />
+}
+
+@code
+{
+    private IList<Race> Races = new List<Race>();
+    private Race? SelectedRace = null;
+    protected override async Task OnInitializedAsync()
+    {
+        Races = await RaceService.GetAllRacesAsync();
+    }
+
+    private void HandleRaceClick(Race race)
+    {
+        SelectedRace = Races.Where(x => x.RaceName == race.RaceName).FirstOrDefault();
+        Console.WriteLine(race.RaceName);
+    }
+}

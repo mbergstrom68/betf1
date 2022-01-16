@@ -2,25 +2,26 @@
 
 @if(SelectedCircuit is null)
 {
+    <Container>
     @foreach (var circuit in Circuits)
-    {
-        <Container @onclick="@(e => HandleCircuitClick(e, circuit.CircuitId))">
-            <Card>
-                <CardBody Margin="Margin.Is2.OnMobile.Is5.OnDesktop">
-                    @circuit.Name
-                </CardBody>
-            </Card>
-        </Container>   
+    {   
+        <Card @onclick="@(e => HandleCircuitClick(e, circuit.CircuitId))">
+            <CardBody>
+                @circuit.Name
+            </CardBody>
+        </Card>             
     }
+    </Container>   
 } else
 {
     <Container>
         <Card>
-            <CardBody Margin="Margin.Is2.OnMobile.Is5.OnDesktop">
+            <CardBody>
                 @SelectedCircuit.Name
             </CardBody>
         </Card>
     </Container>
+    <Betting />
 }
 
 
