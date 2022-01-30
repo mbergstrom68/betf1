@@ -1,0 +1,51 @@
+@using ErgastApi.Responses.Models.RaceInfo
+
+@inject IRaceService RaceService
+
+@if (SelectedRace is null)
+{
+    <Container>
+        <Repeater Items="@Races">
+            <Row Margin="Margin.Is2.FromBottom">
+                <Card @onclick="() => HandleRaceClick(context)">
+                    <CardBody>
+                        <CardTitle Size="5">@context.RaceName</CardTitle>
+                        <CardText>
+                            @context.Circuit.CircuitName
+                        </CardText>
+                    </CardBody>
+                </Card>
+            </Row>
+        </Repeater>
+    </Container>
+}
+else
+{
+    <Container>        
+        <Card Border="Border.Dark">
+            <CardBody>
+                <CardTitle Size="5">@SelectedRace.RaceName</CardTitle>
+                <CardText>
+                    @SelectedRace.Circuit.CircuitName
+                </CardText>
+            </CardBody>
+        </Card>
+    </Container>
+    <Betting SelectedRace="SelectedRace" />
+}
+
+@code
+{
+    private IList<Race> Races = new List<Race>();
+    private Race? SelectedRace = null;
+    protected override async Task OnInitializedAsync()
+    {
+        Races = await RaceService.GetAllRacesAsync();
+    }
+
+    private void HandleRaceClick(Race race)
+    {
+        SelectedRace = Races.Where(x => x.RaceName == race.RaceName).FirstOrDefault();
+        Console.WriteLine(race.RaceName);
+    }
+}

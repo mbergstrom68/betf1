@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/proxies",
+  "proxies": {
+    "proxy1": {
+      "matchCondition": {
+        "methods": [ "GET" ],
+        "route": "/api/news"
+      },
+      "responseOverrides": {
+        "response.body": "{'message' : 'Hello world from proxies!'}",
+        "response.headers.Content-Type": "application/json"
+      }
+    }
+  }
+}

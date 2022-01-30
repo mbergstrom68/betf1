@@ -1,0 +1,40 @@
+@using Blazorise.Components
+@using ErgastApi.Responses.Models
+@using ErgastApi.Responses.Models.RaceInfo
+@using Plk.Blazor.DragDrop
+
+@inject IDriverService DriverService
+
+<Container>
+    <Dropzone Items="@Drivers">
+        <Card>
+            <CardBody>                               
+                <Icon Name="IconName.User" />
+                <Span Margin="Margin.Is5.FromLeft">@context.FullName</Span>
+            </CardBody>
+        </Card>
+    </Dropzone>   
+</Container>
+
+
+@code
+{
+
+    private IList<Driver> Drivers = new List<Driver>();
+    private string[] Positions = new string[10];
+
+    [Parameter]
+    public Race? SelectedRace { get; set; }
+
+    private string SelectedDriver = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        //Drivers = await DriverService.GetAllDrivers();
+        
+        var standings = await DriverService.GetCurrentDriverStandings();
+        Drivers = standings.SelectMany(x => x.Standings.Select(y => y.Driver)).ToList();
+
+        StateHasChanged();
+    }    
+}
