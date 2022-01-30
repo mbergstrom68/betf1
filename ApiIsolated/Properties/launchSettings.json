@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "ApiIsolated": {
+      "commandName": "Project"
+    },
+    "Profile 1": {
+      "commandName": "Executable",
+      "executablePath": "dotnet.exe"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+﻿@using BlazorApp.Client.Models
+@using System.Collections.Generic
+
+<Row Margin="Margin.Is3">
+    @foreach(NewsModel currentItem in NewsItems)
+    {
+        <Column ColumnSize="ColumnSize.Is4">
+            <Card>
+                <CardLink Source="@currentItem.Alt?.AbsoluteUri" Class="stretched-link" target="_blank"></CardLink>
+                <CardImage Source="@currentItem.ImageUrl?.AbsoluteUri"></CardImage>
+                <CardBody>
+                    <CardTitle Size="5">@currentItem.Title</CardTitle>
+                    <CardText>
+                        @((MarkupString)currentItem.Description)
+                    </CardText>
+                </CardBody>
+            </Card>
+        </Column>
+    }
+</Row>
+
+@code
+{
+    [Parameter]
+    public List<NewsModel> NewsItems { get; set; }
+}

@@ -1,6 +1,7 @@
 using ErgastApi.Client;
 using ErgastApi.Requests;
 using ErgastApi.Responses.Models;
+using ErgastApi.Responses.Models.Standings;
 
 public class DriverService : IDriverService
 {
@@ -20,5 +21,17 @@ public class DriverService : IDriverService
         var result = await client.GetResponseAsync(request);
 
         return result.Drivers;
+    }
+
+    public async Task<IList<DriverStandingsList>> GetCurrentDriverStandings()
+    {
+        var request = new DriverStandingsRequest
+        {
+            Season = Seasons.Current
+        };
+
+        var result = await client.GetResponseAsync(request);
+
+        return result.StandingsLists;
     }
 }

@@ -2,24 +2,32 @@
 
 @inject IRaceService RaceService
 
-@if(SelectedRace is null)
-{
-    <Container>    
-    @foreach (var race in Races)
-    {   
-        <Card @onclick="() => HandleRaceClick(race)" >
-            <CardBody>
-                @race.RaceName
-            </CardBody>
-        </Card>
-    }
-    </Container>   
-} else
+@if (SelectedRace is null)
 {
     <Container>
-        <Card>
+        <Repeater Items="@Races">
+            <Row Margin="Margin.Is2.FromBottom">
+                <Card @onclick="() => HandleRaceClick(context)">
+                    <CardBody>
+                        <CardTitle Size="5">@context.RaceName</CardTitle>
+                        <CardText>
+                            @context.Circuit.CircuitName
+                        </CardText>
+                    </CardBody>
+                </Card>
+            </Row>
+        </Repeater>
+    </Container>
+}
+else
+{
+    <Container>        
+        <Card Border="Border.Dark">
             <CardBody>
-                @SelectedRace.RaceName
+                <CardTitle Size="5">@SelectedRace.RaceName</CardTitle>
+                <CardText>
+                    @SelectedRace.Circuit.CircuitName
+                </CardText>
             </CardBody>
         </Card>
     </Container>
