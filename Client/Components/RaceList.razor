@@ -7,14 +7,19 @@
     <Container>
         <Repeater Items="@Races">
             <Row Margin="Margin.Is2.FromBottom">
-                <Card @onclick="() => HandleRaceClick(context)">
-                    <CardBody>
-                        <CardTitle Size="5">@context.RaceName</CardTitle>
-                        <CardText>
+                 <div class="RaceList" @onclick="() => HandleRaceClick(context)" style="background-image: url(/images/@(context.Circuit.CircuitId).jpg);">
+                    <div class=RaceListCard>
+                        <h1 class="RaceName">
+                            @context.RaceName
+                        </h1>
+                        <h2 class="CircuitName">
                             @context.Circuit.CircuitName
-                        </CardText>
-                    </CardBody>
-                </Card>
+                        </h2>
+                        <text class="StartTime">
+                            @context.StartTime
+                        </text>
+                    </div>
+                </div>
             </Row>
         </Repeater>
     </Container>
