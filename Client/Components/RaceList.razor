@@ -7,18 +7,19 @@
     <Container>
         <Repeater Items="@Races">
             <Row Margin="Margin.Is2.FromBottom">
-                 <div class="RaceList" @onclick="() => HandleRaceClick(context)" style="background-image: url(/images/@(context.Circuit.CircuitId).jpg);">
-                    <div class=RaceListCard>
+                <div class="RaceList" @onclick="() => HandleRaceClick(context)" style="background-image: url(/images/Circuits/@(context.Circuit.CircuitId).jpg);">
+                    <div class="RaceBox">
                         <h1 class="RaceName">
                             @context.RaceName
                         </h1>
                         <h2 class="CircuitName">
                             @context.Circuit.CircuitName
                         </h2>
-                        <text class="StartTime">
-                            @context.StartTime
-                        </text>
                     </div>
+                    <div class="RaceTimes"></div>
+                    <text class="RaceTimeBox">
+                            @context.StartTime
+                    </text>
                 </div>
             </Row>
         </Repeater>
@@ -26,7 +27,7 @@
 }
 else
 {
-    <Container>        
+    <Container>
         <Card Border="Border.Dark">
             <CardBody>
                 <CardTitle Size="5">@SelectedRace.RaceName</CardTitle>
