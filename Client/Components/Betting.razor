@@ -7,12 +7,14 @@
 
 <Container>
     <Dropzone Items="@Drivers">
-        <Card>
-            <CardBody>                               
-                <Icon Name="IconName.User" />
-                <Span Margin="Margin.Is5.FromLeft">@context.FullName</Span>
-            </CardBody>
-        </Card>
+        <div class="DriverList">
+            <div class="DriverImage" style="background-image: url(/images/Drivers/@(context.Code).jpg)"></div>
+            <div Class="DriverName">
+                @context.FullName
+            </div>
+            <div class="DriverNum" style="background-image: url(/images/Drivers/DriverNum/@(context.Code).jpg)">
+            </div>
+        </div>
     </Dropzone>   
 </Container>
 
