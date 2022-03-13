@@ -1,28 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>BlazorApp.Client</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<RootNamespace>BlazorApp.Client</RootNamespace>
+		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="blazor-dragdrop" Version="2.3.0" />
-    <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
-    <PackageReference Include="Blazorise.Animate" Version="0.9.5.4" />
-    <PackageReference Include="Blazorise.Bootstrap" Version="0.9.5.4" />
-    <PackageReference Include="Blazorise.Components" Version="0.9.5.4" />
-    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.5.4" />
-    <PackageReference Include="ErgastApiClient" Version="1.2.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.1" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
-    <PackageReference Include="System.ServiceModel.Syndication" Version="6.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="blazor-dragdrop" Version="2.3.0" />
+		<PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
+		<PackageReference Include="Blazorise.Animate" Version="0.9.5.4" />
+		<PackageReference Include="Blazorise.Bootstrap" Version="0.9.5.4" />
+		<PackageReference Include="Blazorise.Components" Version="0.9.5.4" />
+		<PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.5.4" />
+		<PackageReference Include="ErgastApiClient" Version="1.2.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.1" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+		<PackageReference Include="System.ServiceModel.Syndication" Version="6.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Shared\Shared.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Shared\Shared.csproj" />
+	</ItemGroup>
 
 </Project>

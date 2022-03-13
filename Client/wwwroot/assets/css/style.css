@@ -629,6 +629,12 @@ section {
     background-repeat: no-repeat;
 }
 
+.DriverPosition {
+    width: 20px;
+    height: 60px;
+    margin-left: 3px;
+    float: left;
+}
 
 /*--------------------------------------------------------------
 # Cta
