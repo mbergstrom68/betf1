@@ -1,9 +1,12 @@
+@using BlazorApp.Client.Models
+@using BlazorApp.Client.Services
 @using Blazorise.Components
 @using ErgastApi.Responses.Models
 @using ErgastApi.Responses.Models.RaceInfo
 @using Plk.Blazor.DragDrop
 
 @inject IDriverService DriverService
+@inject IBettingService BettingService
 
 <Container>
     <Dropzone Items="@Drivers">
@@ -20,6 +23,13 @@
         </div>
     </Dropzone>   
 </Container>
+<Container>
+    <Row>
+        <Column ColumnSize="ColumnSize.Is12">
+            <Button Type="ButtonType.Button" Color="Color.Primary" Clicked="@SaveButtonClicked" Float="Float.End">Save</Button>
+        </Column>
+    </Row>    
+</Container>
 
 
 @code
@@ -34,12 +44,48 @@
     private string SelectedDriver = "";
 
     protected override async Task OnInitializedAsync()
-    {
-        //Drivers = await DriverService.GetAllDrivers();
-        
+    {        
+        if (SelectedRace is null) return;
+
         var standings = await DriverService.GetCurrentDriverStandings();
-        Drivers = standings.SelectMany(x => x.Standings.Select(y => y.Driver)).ToList();
+        var driversByStandings = standings.SelectMany(x => x.Standings.Select(y => y.Driver)).ToList();
+
+        var bets = await BettingService.GetBetsAsync("Test", SelectedRace.Season, SelectedRace.Round);
+        if(bets is not null)
+        {
+            for (var i = 0; i < bets.Count; i++)
+            {
+                var driver = driversByStandings.Where(x => x.DriverId == bets[i].DriverId).FirstOrDefault();
+                if(driver is not null)
+                {
+                    Drivers.Add(driver);    
+                }                
+            }
+
+            StateHasChanged();
+
+            return;
+        }
+
+        Drivers = driversByStandings;
 
         StateHasChanged();
     }    
+
+    async Task SaveButtonClicked()
+    {
+        if (SelectedRace is null) return;
+
+        List<BetModel> bets = new List<BetModel>();
+        for(var i = 0; i < Drivers.Count; i++)
+        {
+            bets.Add(new BetModel
+            {
+                DriverId = Drivers[i].DriverId,
+                Position = i + 1
+            });
+        }
+
+        await BettingService.SaveBetsAsync("Test", SelectedRace.Season, SelectedRace.Round, bets);
+    }
 }

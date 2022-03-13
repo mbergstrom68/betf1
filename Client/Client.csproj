@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="blazor-dragdrop" Version="2.3.0" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
     <PackageReference Include="Blazorise.Animate" Version="0.9.5.4" />
     <PackageReference Include="Blazorise.Bootstrap" Version="0.9.5.4" />
     <PackageReference Include="Blazorise.Components" Version="0.9.5.4" />
