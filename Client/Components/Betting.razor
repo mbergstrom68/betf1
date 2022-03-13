@@ -12,10 +12,13 @@
     <Dropzone Items="@Drivers">
         <div class="DriverList">
             <div class="DriverImage" style="background-image: url(/images/Drivers/@(context.Code).jpg)"></div>
+            <div class="DriverNum" style="background-image: url(/images/Drivers/DriverNum/@(context.Code).jpg)">
+            </div>
             <div Class="DriverName">
                 @context.FullName
             </div>
-            <div class="DriverNum" style="background-image: url(/images/Drivers/DriverNum/@(context.Code).jpg)">
+            <div class="DriverFlag" style="background-image: url(/images/Drivers/DriverFlag/@(context.Nationality).jpg)">
+                <div class="FlagGradient"></div>
             </div>
         </div>
     </Dropzone>   
