@@ -18,7 +18,10 @@
                     </div>
                     <div class="RaceTimes"></div>
                     <text class="RaceTimeBox">
-                            Race:@context.StartTime
+                            @context.StartTime.ToShortDateString()
+                    </text>
+                    <text class="RaceTimeBox">
+                            Race:@context.StartTime.ToShortTimeString()
                     </text>
                 </div>
             </Row>

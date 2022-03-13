@@ -690,6 +690,14 @@ section {
     background-repeat: no-repeat;
 }
 
+
+.DriverPosition {
+    width: 20px;
+    height: 60px;
+    margin-left: 3px;
+    float: left;
+}
+
 .DriverFlag {
     width: 10%;
     vertical-align: middle;
