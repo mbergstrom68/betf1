@@ -16,7 +16,7 @@
                 @(context.Position)
             </div>
             <div class="DriverImage" style="background-image: url(/images/Drivers/@(context.DriverInfo?.Code).jpg)"></div>            
-            <div class="DriverNum" style="background-image: url(/images/Drivers/DriverNum/@(context.Code).jpg)"></div>
+            <div class="DriverNum" style="background-image: url(/images/Drivers/DriverNum/@(context.DriverInfo?.Code).jpg)"></div>
             <div Class="DriverName">
                 @context.DriverInfo?.FullName
             </div>
