@@ -5,19 +5,22 @@
 @using ErgastApi.Responses.Models.RaceInfo
 @using Plk.Blazor.DragDrop
 
+
 @inject IDriverService DriverService
 @inject IBettingService BettingService
 
 <Container>
-    <Dropzone Items="@Drivers">
+    <Dropzone TItem="BettingDriverModel" Items="Drivers" OnItemDrop="(item)=>HandleItemDropped(item)">
         <div class="DriverList">
-            <div class="DriverImage" style="background-image: url(/images/Drivers/@(context.Code).jpg)"></div>
-            <div class="DriverNum" style="background-image: url(/images/Drivers/DriverNum/@(context.Code).jpg)">
+            <div class="DriverPosition">
+                @(context.Position)
             </div>
+            <div class="DriverImage" style="background-image: url(/images/Drivers/@(context.DriverInfo?.Code).jpg)"></div>            
+            <div class="DriverNum" style="background-image: url(/images/Drivers/DriverNum/@(context.DriverInfo?.Code).jpg)"></div>
             <div Class="DriverName">
-                @context.FullName
+                @context.DriverInfo?.FullName
             </div>
-            <div class="DriverFlag" style="background-image: url(/images/Drivers/DriverFlag/@(context.Nationality).jpg)">
+            <div class="DriverNum" style="background-image: url(/images/Drivers/DriverNum/@(context.DriverInfo?.Code).jpg)">
                 <div class="FlagGradient"></div>
             </div>
         </div>
@@ -35,7 +38,7 @@
 @code
 {
 
-    private IList<Driver> Drivers = new List<Driver>();
+    private IList<BettingDriverModel> Drivers = new List<BettingDriverModel>();
     private string[] Positions = new string[10];
 
     [Parameter]
@@ -51,26 +54,36 @@
         var driversByStandings = standings.SelectMany(x => x.Standings.Select(y => y.Driver)).ToList();
 
         var bets = await BettingService.GetBetsAsync("Test", SelectedRace.Season, SelectedRace.Round);
+
         if(bets is not null)
         {
-            for (var i = 0; i < bets.Count; i++)
+            var betsByPosition = bets.OrderBy(x => x.Position); 
+            foreach (var bet in bets)
             {
-                var driver = driversByStandings.Where(x => x.DriverId == bets[i].DriverId).FirstOrDefault();
+                var driver = driversByStandings.Where(x => x.DriverId == bet.DriverId).FirstOrDefault();
                 if(driver is not null)
                 {
-                    Drivers.Add(driver);    
-                }                
-            }
+                    Drivers.Add(new BettingDriverModel { Position = bet.Position, DriverInfo = driver});    
+                }
+            }            
 
             StateHasChanged();
 
             return;
         }
 
-        Drivers = driversByStandings;
+        Drivers = driversByStandings.Select((x, i) => new BettingDriverModel { Position = i + 1, DriverInfo = x }).ToList();
 
         StateHasChanged();
     }    
+
+    void HandleItemDropped(BettingDriverModel bettingDriver)
+    {
+        for (var i = 0; i < Drivers.Count; i++)
+        {
+            Drivers[i].Position = i + 1;
+        }
+    }
 
     async Task SaveButtonClicked()
     {
@@ -81,7 +94,7 @@
         {
             bets.Add(new BetModel
             {
-                DriverId = Drivers[i].DriverId,
+                DriverId = Drivers[i].DriverInfo?.DriverId ?? "",
                 Position = i + 1
             });
         }

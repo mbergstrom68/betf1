@@ -690,6 +690,14 @@ section {
     background-repeat: no-repeat;
 }
 
+
+.DriverPosition {
+    width: 20px;
+    height: 60px;
+    margin-left: 3px;
+    float: left;
+}
+
 .DriverFlag {
     width: 15%;
     vertical-align: middle;
@@ -708,7 +716,6 @@ section {
     opacity: 1;
     transition: opacity 0.5s, width 0.3s;
 }
-
 
 /*--------------------------------------------------------------
 # Cta
