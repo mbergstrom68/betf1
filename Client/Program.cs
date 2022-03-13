@@ -6,6 +6,8 @@ using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
 using ErgastApi.Client;
 using Plk.Blazor.DragDrop;
+using Blazored.LocalStorage;
+using BlazorApp.Client.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -16,6 +18,8 @@ builder.Services
       } )
       .AddBootstrapProviders()
       .AddFontAwesomeIcons();
+
+builder.Services.AddBlazoredLocalStorage();
 
 builder.Services.AddBlazorDragDrop();
 
@@ -30,5 +34,6 @@ builder.Services.AddSingleton<IErgastClient, ErgastClient>();
 builder.Services.AddScoped<ICircuitService, CircuitsService>();
 builder.Services.AddScoped<IRaceService, RaceService>();
 builder.Services.AddScoped<IDriverService, DriverService>();
+builder.Services.AddScoped<IBettingService, BettingService>();
 
 await builder.Build().RunAsync();
